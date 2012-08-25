@@ -7,10 +7,10 @@ sslfun is a small rails gem which allows to manage rsa key pairs, certificate si
 == Usage
 
 * Create a standard ActiveRecord model in your application and add a foreign key for the key or/and the certificate which is associated with this object 
-** rails g model app name:string app_key_id:integer app_cert_id:integer
+ * rails g model app name:string app_key_id:integer app_cert_id:integer
 * Decorate the model in a way that rails and sslfun knows that this foreign key is an association to a rsa key pair or a ssl certificate  
-** sslfun_certificate :app_cert
-** sslfun_keypair :app_key
+ * sslfun_certificate :app_cert
+ * sslfun_keypair :app_key
 * That's it now you are able to generate csr's, generating keys and assigning new certificates. 
 
 == License
