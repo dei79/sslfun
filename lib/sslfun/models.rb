@@ -33,7 +33,7 @@ module SslFun
 
           # set the after_initialize callback if needed
           if options[:auto_generate]
-            self.send :after_initialize, :autogenerate_new_key_pair
+            self.send :after_initialize, "autogenerate_new_key_pair_for_#{attrib}".to_sym
           end
         end
       end
@@ -41,10 +41,21 @@ module SslFun
 
     module InstanceMethods
 
-      def autogenerate_new_key_pair
-        self.app_key = SslFun::KeyPair.new unless self.app_key
+      def method_missing(method, *args, &block)
+        if method.to_s.starts_with?('autogenerate_new_key_pair_for_')
+          autogenerate_new_key_pair(method.to_s.sub('autogenerate_new_key_pair_for_',''))
+        else
+          super(method, *args, &block)
+        end
       end
 
+      def autogenerate_new_key_pair(symbol)
+        # try to get an existing key pair
+        kp = self.send("apn_key_pair")
+
+        # set a new one if need
+        self.send("#{symbol.to_s}=", SslFun::KeyPair.new) unless kp
+      end
     end
 
   end

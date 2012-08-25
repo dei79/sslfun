@@ -1,7 +1,7 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "ssl_fun/version"
+require "sslfun/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
                   "create new key pairs and csrs. The signed certificates can be imported back into the application. " +
                   "All is stored in your rails data model"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.8"
